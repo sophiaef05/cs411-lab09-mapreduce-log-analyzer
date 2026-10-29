@@ -1,0 +1,29 @@
+Expected top 10 (independently computed from logs.txt):
+  /checkout     50
+  /home 45
+  /api/cart     40
+  /product/123  35
+  /product/456  35
+  /login        30
+  /api/search   25
+  /static/logo.png      20
+  /about        10
+  /contact      8
+
+Your output (output.txt):
+  /checkout     50
+  /home 45
+  /api/cart     40
+  /product/123  35
+  /product/456  35
+  /login        30
+  /api/search   25
+  /static/logo.png      20
+  /about        10
+  /contact      8
+
+  [PASS] output matches exactly
+
+============================================================
+  SUCCESS TOKEN: MAPREDUCE_SHUFFLE_VERIFIED
+============================================================
