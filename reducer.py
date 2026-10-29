@@ -26,7 +26,35 @@ def main() -> None:
     # 2. After the stream ends, sort the completed (endpoint, count) groups:
     #    descending by count, ties broken by endpoint ascending.
     # 3. Print only the top 10, each as "<endpoint>\t<count>".
-    raise NotImplementedError
+    results = []
+    current_endpoint = None
+    current_count = 0
+
+    for line in sys.stdin:
+        parts = line.rstrip("\n").split("\t")
+        if len(parts) != 2:
+            continue
+        endpoint, value = parts
+        try:
+            count = int(value)
+        except ValueError:
+            continue
+
+        if endpoint == current_endpoint:
+            current_count += count
+        else:
+            if current_endpoint is not None:
+                results.append((current_endpoint, current_count))
+            current_endpoint = endpoint
+            current_count = count
+
+    if current_endpoint is not None:
+        results.append((current_endpoint, current_count))
+
+    results.sort(key=lambda kv: (-kv[1], kv[0]))
+
+    for endpoint, count in results[:10]:
+        sys.stdout.write(f"{endpoint}\t{count}\n")
 
 
 if __name__ == "__main__":

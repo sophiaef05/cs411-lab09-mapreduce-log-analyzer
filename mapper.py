@@ -17,7 +17,10 @@ REQUEST_LINE_RE = re.compile(r'"[A-Z]+ (\S+) HTTP/')
 
 def main() -> None:
     # TODO: for each line of sys.stdin, extract the endpoint and print "<endpoint>\t1"
-    raise NotImplementedError
+    for line in sys.stdin:
+        match = REQUEST_LINE_RE.search(line)
+        if match:
+            sys.stdout.write(f"{match.group(1)}\t1\n")
 
 
 if __name__ == "__main__":
